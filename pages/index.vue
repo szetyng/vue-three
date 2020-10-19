@@ -1,6 +1,10 @@
 <template>
-  <div id="scene-container">
+  <div>
+    <!-- <v-btn color="primary" @click="render">Render</v-btn> -->
+  
+    <div id="scene-container">
 
+    </div>
   </div>
 </template>
 
@@ -10,18 +14,23 @@ import { World } from '../threevue/World/World.js';
 export default {
   data() {
     return {
-
+      world: null
+    }
+  },
+  methods: {
+    render() {
+      this.world.render();
     }
   },
   mounted() {
     // Get a reference to the container element
     const container = document.querySelector('#scene-container');
 
-    // 1. Create an instance of the World app
-    const world = new World(container);
+    // Create an instance of the World app
+    this.world = new World(container);
 
-    // 2. Render the scene
-    world.render();
+    this.render();
+
   }
 }
 </script>
