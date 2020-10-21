@@ -3,14 +3,28 @@ import {
   MathUtils,
   Mesh,
   MeshStandardMaterial,
+  TextureLoader
 } from 'three';
+
+function createMaterial() {
+  const textureLoader = new TextureLoader();
+
+  const texture = textureLoader.load(require('@/assets/textures/uv-test-bw.png'));
+
+  // a physically correct "standard" material
+  const material = new MeshStandardMaterial({ 
+    map: texture,
+    color: 'orchid' 
+  });
+
+  return material
+}
 
 function createCube() {
   // create a geometry
   const geometry = new BoxBufferGeometry(2, 2, 2);
 
-  // a physically correct "standard" material
-  const material = new MeshStandardMaterial({ color: 'orchid' });
+  const material = createMaterial();
 
   // create a Mesh containing the geometry and material
   const cube = new Mesh(geometry, material);
