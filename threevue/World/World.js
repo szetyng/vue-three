@@ -1,5 +1,6 @@
 import { createCamera } from './components/camera.js';
 import { createCube } from './components/cube.js';
+import { createCylinder } from './components/cylinder.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
 
@@ -28,8 +29,8 @@ class World {
     const controls = createControls(camera, renderer.domElement);
     const loadingManager = new LoadingManager();
 
-    const cube = createCube(loadingManager);
-    const light = createLights();
+    const cylinder = createCylinder(loadingManager);
+    const { ambientLight, mainLight } = createLights();
 
     loadingManager.onLoad = () => {
       this.render();
@@ -43,7 +44,7 @@ class World {
     //loop.updatables.push(controls);
     //loop.updatables.push(cube);
 
-    scene.add(cube, light);
+    scene.add(cylinder, mainLight, ambientLight);
 
     const resizer = new Resizer(container, camera, renderer);
     
