@@ -18,8 +18,9 @@ export default {
     }
   },
   methods: {
-    render() {
-      this.world.render();
+    start() {
+      // Start the animation loop
+      this.world.start();
     }
   },
   mounted() {
@@ -29,7 +30,7 @@ export default {
     // Create an instance of the World app
     this.world = new World(container);
 
-    this.render();
+    this.start();
 
   }
 }
