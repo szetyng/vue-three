@@ -25,8 +25,12 @@ class World {
 
     const controls = createControls(camera, renderer.domElement);
 
-    const cube = createCube();
+    const { cube, manager } = createCube();
     const light = createLights();
+
+    manager.onLoad = () => {
+      this.render();
+    }
 
     // rendering on demand
     controls.addEventListener('change', () => {
