@@ -3,19 +3,12 @@ import {
   MathUtils,
   Mesh,
   MeshStandardMaterial,
-  TextureLoader,
-  LoadingManager
+  TextureLoader
 } from 'three';
 
-function createManager() {
-  const manager = new LoadingManager();
 
-  return manager
-}
-
-
-function createMaterial(manager) {
-  const textureLoader = new TextureLoader(manager);
+function createMaterial(loadingManager) {
+  const textureLoader = new TextureLoader(loadingManager);
 
   const texture = textureLoader.load(require('@/assets/textures/uv-test-bw.png'));
 
@@ -28,12 +21,11 @@ function createMaterial(manager) {
   return material
 }
 
-function createCube() {
+function createCube(loadingManager) {
   // create a geometry
   const geometry = new BoxBufferGeometry(2, 2, 2);
 
-  const manager = createManager();
-  const material = createMaterial(manager);
+  const material = createMaterial(loadingManager);
 
   // create a Mesh containing the geometry and material
   const cube = new Mesh(geometry, material);
@@ -49,7 +41,7 @@ function createCube() {
     cube.rotation.y += radiansPerSecond * delta;
   };
 
-  return {cube, manager};
+  return cube;
 }
 
 export { createCube };
