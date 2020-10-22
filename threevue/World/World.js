@@ -3,7 +3,7 @@ import {
   createAxesHelper,
   createGridHelper,
 } from './components/helpers.js';
-import { createCube } from './components/cube.js';
+import { Train } from './components/Train/Train.js';
 import { createSegments } from './components/segments.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
@@ -33,7 +33,8 @@ class World {
     const controls = createControls(camera, renderer.domElement);
     const loadingManager = new LoadingManager();
 
-    const cylinder = createSegments(loadingManager);
+    //const cylinder = createSegments(loadingManager);
+    const train = new Train();
     const { ambientLight, mainLight } = createLights();
 
     loadingManager.onLoad = () => {
@@ -48,7 +49,7 @@ class World {
     //loop.updatables.push(controls);
     //loop.updatables.push(cube);
 
-    scene.add(cylinder, mainLight, ambientLight);
+    scene.add(mainLight, ambientLight, train);
 
     const resizer = new Resizer(container, camera, renderer);
     scene.add(createAxesHelper(), createGridHelper());
