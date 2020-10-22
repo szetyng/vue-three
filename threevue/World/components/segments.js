@@ -25,19 +25,19 @@ function createMaterial(loadingManager) {
   return material
 }
 
-function createCylinder(loadingManager) {
+function createSegments(loadingManager) {
   const segmentLength = MathUtils.degToRad(45);
 
   // create a geometry
   const geometry = new CylinderBufferGeometry(
-    1, // radiusTop
-    1, // radiusBottom
-    5, // height
-    15, // radialSegments
+    3, // radiusTop
+    3, // radiusBottom
+    1.4, // height
+    3, // radialSegments
     1, // heightSegments
     true, // openEnded
-     // thetaStart
-     // thetaLength  
+    0, // thetaStart
+    segmentLength // thetaLength  
   );
 
   const material = createMaterial(loadingManager);
@@ -45,14 +45,36 @@ function createCylinder(loadingManager) {
   // create a Mesh containing the geometry and material
   const cylinder = new Mesh(geometry, material);
 
-  const radiansPerSecond = MathUtils.degToRad(30); // 30 degrees
+  const group = new Group();
+  //group.add(cylinder);
+  for (let i=0; i<MathUtils.degToRad(90); i+=segmentLength) {
+    const seg = cylinder.clone();
+    console.log(MathUtils.radToDeg(i))
 
-  // this method will be called once per frame
-  cylinder.tick = (delta) => {
-    cylinder.rotation.z += radiansPerSecond * delta;
-  };
+    seg.geometry = new CylinderBufferGeometry(
+      3, // radiusTop
+      3, // radiusBottom
+      1.4, // height
+      3, // radialSegments
+      1, // heightSegments
+      true, // openEnded
+      i, // thetaStart
+      segmentLength // thetaLength  
+    );
 
-  return cylinder;
+    group.add(seg);
+  }
+
+
+
+
+
+
+  //cylinder.rotation.set(-0.5, -0.1, 0.8);
+  group.rotation.set(MathUtils.degToRad(90), 0, 0)
+
+
+  return group;
 }
 
-export { createCylinder };
+export { createSegments };

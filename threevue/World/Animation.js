@@ -5,6 +5,7 @@ import {
 } from './components/helpers.js';
 import { createCube } from './components/cube.js';
 import { createSegments } from './components/segments.js';
+import { createCylinder } from './components/cylinder.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
 
@@ -22,18 +23,18 @@ let renderer;
 let scene;
 let loop;
 
-class World {
+class AnimatedWorld {
   constructor(container) {
     camera = createCamera();
     scene = createScene();
     renderer = createRenderer();
-    //loop = new Loop(camera, scene, renderer);
+    loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
     const controls = createControls(camera, renderer.domElement);
     const loadingManager = new LoadingManager();
 
-    const cylinder = createSegments(loadingManager);
+    const cylinder = createCylinder(loadingManager);
     const { ambientLight, mainLight } = createLights();
 
     loadingManager.onLoad = () => {
@@ -46,7 +47,7 @@ class World {
     });
 
     //loop.updatables.push(controls);
-    //loop.updatables.push(cube);
+    loop.updatables.push(cylinder);
 
     scene.add(cylinder, mainLight, ambientLight);
 
@@ -74,4 +75,4 @@ class World {
   }
 }
 
-export { World };
+export { AnimatedWorld };
