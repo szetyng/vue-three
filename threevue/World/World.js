@@ -4,6 +4,7 @@ import {
   createGridHelper,
 } from './components/helpers.js';
 import { Train } from './components/Train/Train.js';
+import { RingSegments } from './components/RingSegments/RingSegments.js';
 import { createSegments } from './components/segments.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
@@ -21,6 +22,7 @@ let camera;
 let renderer;
 let scene;
 let loop;
+let controls;
 
 class World {
   constructor(container) {
@@ -30,11 +32,11 @@ class World {
     //loop = new Loop(camera, scene, renderer);
     container.append(renderer.domElement);
 
-    const controls = createControls(camera, renderer.domElement);
+    controls = createControls(camera, renderer.domElement);
     const loadingManager = new LoadingManager();
 
-    //const cylinder = createSegments(loadingManager);
-    const train = new Train();
+    // const cylinder = createSegments(loadingManager);
+    const ringSegments = new RingSegments();
     const { ambientLight, mainLight } = createLights();
 
     loadingManager.onLoad = () => {
@@ -49,7 +51,7 @@ class World {
     //loop.updatables.push(controls);
     //loop.updatables.push(cube);
 
-    scene.add(mainLight, ambientLight, train);
+    scene.add(mainLight, ambientLight, ringSegments);
 
     const resizer = new Resizer(container, camera, renderer);
     scene.add(createAxesHelper(), createGridHelper());
@@ -72,6 +74,10 @@ class World {
   
   stop() {
     loop.stop();
+  }
+
+  resetCamera() {
+    controls.reset();
   }
 }
 

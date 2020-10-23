@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- <v-btn color="primary" @click="render">Render</v-btn> -->
+    <!-- <v-btn color="primary" @click="resetCamera">Reset Controls</v-btn> -->
   
-    <div id="scene-container">
+    <div id="scene-container" @dblclick="resetCamera">
 
     </div>
   </div>
@@ -21,6 +21,10 @@ export default {
     render() {
       // Render on demand
       this.world.render();
+    },
+
+    resetCamera() {
+      this.world.resetCamera();
     }
   },
   mounted() {
