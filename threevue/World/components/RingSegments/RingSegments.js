@@ -11,7 +11,14 @@ class RingSegments extends Group {
     this.meshes = createMeshes();
 
     this.add(
-      this.meshes.segment1
+      // this.meshes.segment1,
+      // this.meshes.segment2,
+      // this.meshes.segment3,
+      // this.meshes.segment4,
+      // this.meshes.segment5,
+      // this.meshes.segment6,
+      // this.meshes.segment7,
+      this.meshes.segment8
     );
   }
 }

@@ -36,7 +36,19 @@ class World {
     const loadingManager = new LoadingManager();
 
     // const cylinder = createSegments(loadingManager);
-    const ringSegments = new RingSegments();
+    const ringSegments1 = new RingSegments();
+    const ringSegments2 = new RingSegments();
+    const ringSegments3 = new RingSegments();
+    const ringSegments4 = new RingSegments();
+    const ringSegments5 = new RingSegments();
+    const ringSegments6 = new RingSegments();
+    const ringSegments7 = new RingSegments();
+    ringSegments2.position.z = -1.4;
+    ringSegments3.position.z = -1.4 * 2;
+    ringSegments4.position.z = -1.4 * 3;
+    ringSegments5.position.z = -1.4 * 4;
+    ringSegments6.position.z = -1.4 * 5;
+    ringSegments7.position.z = -1.4 * 6;
     const { ambientLight, mainLight } = createLights();
 
     loadingManager.onLoad = () => {
@@ -51,7 +63,17 @@ class World {
     //loop.updatables.push(controls);
     //loop.updatables.push(cube);
 
-    scene.add(mainLight, ambientLight, ringSegments);
+    scene.add(
+      mainLight, 
+      ambientLight, 
+      ringSegments1, 
+      // ringSegments2,
+      // ringSegments3,
+      // ringSegments4,
+      // ringSegments5,
+      // ringSegments6,
+      // ringSegments7,
+      );
 
     const resizer = new Resizer(container, camera, renderer);
     scene.add(createAxesHelper(), createGridHelper());
